@@ -87,11 +87,11 @@ public class OlympicRings extends JApplet {
 				startingPosition.y + radius * 2);
 
 		// Variables - Olympic rings
-		Ring blueRing = new Ring(blueRingCenter, radius, stroke, Color.BLUE);
-		Ring yellowRing = new Ring(yellowRingCenter, radius, stroke, Color.YELLOW);
+		Ring blueRing = new Ring(blueRingCenter, radius, stroke, new Color(24, 134, 192));
+		Ring yellowRing = new Ring(yellowRingCenter, radius, stroke, new Color(249, 176, 65));
 		Ring blackRing = new Ring(blackRingCenter, radius, stroke, Color.BLACK);
-		Ring redRing = new Ring(redRingCenter, radius, stroke, Color.RED);
-		Ring greenRing = new Ring(greenRingCenter, radius, stroke, Color.GREEN);
+		Ring redRing = new Ring(redRingCenter, radius, stroke, new Color(234, 54, 82));
+		Ring greenRing = new Ring(greenRingCenter, radius, stroke, new Color(36, 138, 64));
 
 		// Set Cut-out position
 		yellowRing.setCutOutPosition((int) getCutoutPosition(yellowRing, blueRing));
