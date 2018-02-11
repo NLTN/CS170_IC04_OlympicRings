@@ -219,18 +219,6 @@ public class OlympicRings extends JApplet {
 				// R = Square of (x2-x1)^2 + (y2 - y1)^2
 				return Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
 			}
-
-			// public static class IntersectionPoints {
-			// public String name;
-			// public String location;
-			//
-			// public static String[] getExample() {
-			// String ar[] = new String[2];
-			// ar[0] = name;
-			// ar[1] = location;
-			// return ar; // returning two values at once
-			// }
-			// }
 		}
 
 	}
