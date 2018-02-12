@@ -20,14 +20,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JApplet;
 
 public class OlympicRings extends JApplet implements ActionListener {
-
+	// Variables
 	private static final long serialVersionUID = 6080844738077899107L;
+	private final Point startingPosition = new Point(20, 100);
+	private int radius = 105, gap = 40, stroke = 10;
 
-	final Point startingPosition = new Point(20, 100);
-	int radius = 80;
-	int gap = 20;
-	short stroke = 10;
-
+	// Initialize
 	public void init() {
 		// Set the canvas size.
 		setSize(800, 500);
@@ -49,11 +47,10 @@ public class OlympicRings extends JApplet implements ActionListener {
 		Button btnDecreaseRadius = new Button("Radius -");
 		Button btnIncreaseGap = new Button("Gap +");
 		Button btnDecreaseGap = new Button("Gap -");
-
 		Button btnIncreaseStroke = new Button("Stroke +");
 		Button btnDecreaseStroke = new Button("Stroke -");
 
-		// Turn Layout manager off
+		// Turn off the layout manager
 		setLayout(null);
 
 		// Add button to layout
@@ -68,7 +65,7 @@ public class OlympicRings extends JApplet implements ActionListener {
 		this.add(btnDecreaseStroke);
 		this.add(btnIncreaseStroke);
 
-		// Button Properties
+		// Button Properties - Sizes & Positions
 		btnLeft.setBounds(startingPosition.x, startingPosition.y + buttonHeight, buttonWidth, buttonHeight);
 		btnDown.setBounds(btnLeft.getWidth() + btnLeft.getX(), startingPosition.y + buttonHeight, buttonWidth,
 				buttonHeight);
@@ -92,12 +89,11 @@ public class OlympicRings extends JApplet implements ActionListener {
 		btnIncreaseStroke.setBounds(btnDecreaseStroke.getWidth() + btnDecreaseStroke.getX(),
 				startingPosition.y + buttonHeight, buttonWidth, buttonHeight);
 
-		// Add listener
+		// Add listeners
 		btnLeft.addActionListener(this);
 		btnDown.addActionListener(this);
 		btnRight.addActionListener(this);
 		btnUp.addActionListener(this);
-
 		btnDecreaseRadius.addActionListener(this);
 		btnIncreaseRadius.addActionListener(this);
 		btnDecreaseGap.addActionListener(this);
@@ -151,13 +147,15 @@ public class OlympicRings extends JApplet implements ActionListener {
 	}
 
 	public void paint(Graphics canvas) {
+		// Clear the canvas
 		canvas.clearRect(0, 0, this.getWidth(), this.getHeight());
 
+		// Draw the rings
 		drawOlympicRings(startingPosition, radius, gap, stroke, canvas);
 	}
 
 	/**
-	 * Return the angle. Based on the math
+	 * Return the angle as radian. Based on the math
 	 * http://www.mathsisfun.com/polar-cartesian-coordinates.html
 	 */
 	public double getCutoutPosition(Circle target, Circle source) {
