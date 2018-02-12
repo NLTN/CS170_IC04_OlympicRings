@@ -239,6 +239,11 @@ public class OlympicRings extends JApplet {
 						+ Math.pow((ring2.Center.getY() - ring1.Center.getY()), 2));
 			}
 
+			/**
+			 * Return the distance between the centers of two circles as {@code double} value.
+			 * This method is based on the math https://math.stackexchange.com/a/1367732 by
+			 * johannesvalks.
+			 */
 			public static double getDistanceBetweenTheCentersOfTwoCircles(double x1, double x2, double y1, double y2) {
 				// R = Square of (x2-x1)^2 + (y2 - y1)^2
 				return Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
