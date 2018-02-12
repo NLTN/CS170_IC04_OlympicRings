@@ -15,21 +15,20 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JApplet;
 
 public class OlympicRings extends JApplet implements ActionListener {
-	// Variables
+	// FIELDS
 	private static final long serialVersionUID = 6080844738077899107L;
-	private final Point startingPosition = new Point(20, 100);
-	private int radius = 105, gap = 40, stroke = 10;
-	private final int canvasWidth = 800, canvasHeight = 500;
-	private int buttonWidth = 70, buttonHeight = 20;
+	private final Point STARTING_POSITION = new Point(20, 100);
+	private final int CANVAS_WIDTH = 800, CANVAS_HEIGHT = 500;
+	private final int BUTTON_WIDTH = 70, BUTTON_HEIGHT = 20;
+	private int radius = 105, gap = 40, stroke = 10;	
 
 	// Initialize
 	public void init() {
 		// Set the canvas size.
-		setSize(canvasWidth, canvasHeight);
+		setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 
 		// Initialize buttons
 		initControllers();
@@ -68,29 +67,29 @@ public class OlympicRings extends JApplet implements ActionListener {
 		this.add(btnIncreaseStroke);
 
 		// Button Properties - Sizes & Positions
-		btnLeft.setBounds(controllerStartingPosition.x, controllerStartingPosition.y + buttonHeight, buttonWidth, buttonHeight);
-		btnCenter.setBounds(btnLeft.getWidth() + btnLeft.getX(), controllerStartingPosition.y + buttonHeight, buttonWidth,
-				buttonHeight);
-		btnDown.setBounds(btnCenter.getX(), btnCenter.getY() + buttonHeight, buttonWidth, buttonHeight);
-		btnRight.setBounds(btnCenter.getWidth() + btnCenter.getX(), controllerStartingPosition.y + buttonHeight, buttonWidth,
-				buttonHeight);
+		btnLeft.setBounds(controllerStartingPosition.x, controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnCenter.setBounds(btnLeft.getWidth() + btnLeft.getX(), controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH,
+				BUTTON_HEIGHT);
+		btnDown.setBounds(btnCenter.getX(), btnCenter.getY() + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnRight.setBounds(btnCenter.getWidth() + btnCenter.getX(), controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH,
+				BUTTON_HEIGHT);
 
-		btnUp.setBounds(btnCenter.getX(), controllerStartingPosition.y, buttonWidth, buttonHeight);
+		btnUp.setBounds(btnCenter.getX(), controllerStartingPosition.y, BUTTON_WIDTH, BUTTON_HEIGHT);
 
-		btnDecreaseRadius.setBounds(btnRight.getWidth() + btnRight.getX() + 20, controllerStartingPosition.y + buttonHeight,
-				buttonWidth, buttonHeight);
+		btnDecreaseRadius.setBounds(btnRight.getWidth() + btnRight.getX() + 20, controllerStartingPosition.y + BUTTON_HEIGHT,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnIncreaseRadius.setBounds(btnDecreaseRadius.getWidth() + btnDecreaseRadius.getX(),
-				controllerStartingPosition.y + buttonHeight, buttonWidth, buttonHeight);
+				controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
 
 		btnDecreaseGap.setBounds(btnIncreaseRadius.getWidth() + btnIncreaseRadius.getX() + 20,
-				controllerStartingPosition.y + buttonHeight, buttonWidth, buttonHeight);
-		btnIncreaseGap.setBounds(btnDecreaseGap.getWidth() + btnDecreaseGap.getX(), controllerStartingPosition.y + buttonHeight,
-				buttonWidth, buttonHeight);
+				controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnIncreaseGap.setBounds(btnDecreaseGap.getWidth() + btnDecreaseGap.getX(), controllerStartingPosition.y + BUTTON_HEIGHT,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
 
 		btnDecreaseStroke.setBounds(btnIncreaseGap.getWidth() + btnIncreaseGap.getX() + 20,
-				controllerStartingPosition.y + buttonHeight, buttonWidth, buttonHeight);
+				controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnIncreaseStroke.setBounds(btnDecreaseStroke.getWidth() + btnDecreaseStroke.getX(),
-				controllerStartingPosition.y + buttonHeight, buttonWidth, buttonHeight);
+				controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
 
 		// Add listeners
 		btnLeft.addActionListener(this);
@@ -109,20 +108,20 @@ public class OlympicRings extends JApplet implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "Left":
-			startingPosition.x -= 10;
+			STARTING_POSITION.x -= 10;
 			break;
 		case "Right":
-			startingPosition.x += 10;
+			STARTING_POSITION.x += 10;
 			break;
 		case "Up":
-			startingPosition.y -= 10;
+			STARTING_POSITION.y -= 10;
 			break;
 		case "Down":
-			startingPosition.y += 10;
+			STARTING_POSITION.y += 10;
 			break;
 		case "Center":
-			startingPosition.x = (canvasWidth - 3 * 2 * radius - 2 * gap - 2 * stroke) / 2;
-			startingPosition.y = (canvasHeight + 3 * buttonHeight - 3 * radius + stroke) / 2;
+			STARTING_POSITION.x = (CANVAS_WIDTH - 3 * 2 * radius - 2 * gap - 2 * stroke) / 2;
+			STARTING_POSITION.y = (CANVAS_HEIGHT + 3 * BUTTON_HEIGHT - 3 * radius + stroke) / 2;
 			break;
 		case "Radius +":
 			radius += 5;
@@ -159,7 +158,7 @@ public class OlympicRings extends JApplet implements ActionListener {
 		canvas.clearRect(0, 0, this.getWidth(), this.getHeight());
 
 		// Draw the rings
-		drawOlympicRings(startingPosition, radius, gap, stroke, canvas);
+		drawOlympicRings(STARTING_POSITION, radius, gap, stroke, canvas);
 	}
 
 	/**
