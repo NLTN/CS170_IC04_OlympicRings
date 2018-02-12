@@ -8,6 +8,7 @@
  */
 
 import java.awt.BasicStroke;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -16,14 +17,20 @@ import java.awt.Point;
 import javax.swing.JApplet;
 
 public class OlympicRings extends JApplet {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 6080844738077899107L;
 
 	public void init() {
 		// Set the canvas size.
 		setSize(600, 300);
+		
+//		// Buttons
+//		// Construct the button
+//	     Button beep = new Button("Beep");
+//
+//	     beep.setSize(50, 30);
+//	     // add the button to the layout
+//	     this.add(beep);
 	}
 
 	public void paint(Graphics canvas) {
@@ -58,6 +65,10 @@ public class OlympicRings extends JApplet {
 		 */
 	}
 
+	/**
+	 * Return the angle.
+	 * Based on the math http://www.mathsisfun.com/polar-cartesian-coordinates.html
+	 */
 	public double getCutoutPosition(Ring target, Ring source) {
 		// Variables
 		Trigonometry.Circle.IntersectionPoints iPoints;
