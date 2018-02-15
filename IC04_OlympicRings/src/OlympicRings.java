@@ -23,7 +23,7 @@ public class OlympicRings extends JApplet implements ActionListener {
 	private final Point STARTING_POSITION = new Point(20, 100);
 	private final int CANVAS_WIDTH = 800, CANVAS_HEIGHT = 500;
 	private final int BUTTON_WIDTH = 70, BUTTON_HEIGHT = 20;
-	private int radius = 105, gap = 40, stroke = 10;	
+	private int radius = 105, gap = 40, stroke = 10;
 
 	// Initialize
 	public void init() {
@@ -67,24 +67,25 @@ public class OlympicRings extends JApplet implements ActionListener {
 		this.add(btnIncreaseStroke);
 
 		// Button Properties - Sizes & Positions
-		btnLeft.setBounds(controllerStartingPosition.x, controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
-		btnCenter.setBounds(btnLeft.getWidth() + btnLeft.getX(), controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH,
+		btnLeft.setBounds(controllerStartingPosition.x, controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH,
 				BUTTON_HEIGHT);
+		btnCenter.setBounds(btnLeft.getWidth() + btnLeft.getX(), controllerStartingPosition.y + BUTTON_HEIGHT,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnDown.setBounds(btnCenter.getX(), btnCenter.getY() + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
-		btnRight.setBounds(btnCenter.getWidth() + btnCenter.getX(), controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH,
-				BUTTON_HEIGHT);
+		btnRight.setBounds(btnCenter.getWidth() + btnCenter.getX(), controllerStartingPosition.y + BUTTON_HEIGHT,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
 
 		btnUp.setBounds(btnCenter.getX(), controllerStartingPosition.y, BUTTON_WIDTH, BUTTON_HEIGHT);
 
-		btnDecreaseRadius.setBounds(btnRight.getWidth() + btnRight.getX() + 20, controllerStartingPosition.y + BUTTON_HEIGHT,
-				BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnDecreaseRadius.setBounds(btnRight.getWidth() + btnRight.getX() + 20,
+				controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnIncreaseRadius.setBounds(btnDecreaseRadius.getWidth() + btnDecreaseRadius.getX(),
 				controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
 
 		btnDecreaseGap.setBounds(btnIncreaseRadius.getWidth() + btnIncreaseRadius.getX() + 20,
 				controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
-		btnIncreaseGap.setBounds(btnDecreaseGap.getWidth() + btnDecreaseGap.getX(), controllerStartingPosition.y + BUTTON_HEIGHT,
-				BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnIncreaseGap.setBounds(btnDecreaseGap.getWidth() + btnDecreaseGap.getX(),
+				controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
 
 		btnDecreaseStroke.setBounds(btnIncreaseGap.getWidth() + btnIncreaseGap.getX() + 20,
 				controllerStartingPosition.y + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -195,11 +196,11 @@ public class OlympicRings extends JApplet implements ActionListener {
 				startingPosition.y + radius * 2);
 
 		// Variables - Olympic rings
-		Circle blueRing = new Circle(blueRingCenter, radius, stroke, new Color(24, 134, 192));
-		Circle yellowRing = new Circle(yellowRingCenter, radius, stroke, new Color(249, 176, 65));
-		Circle blackRing = new Circle(blackRingCenter, radius, stroke, Color.BLACK);
-		Circle redRing = new Circle(redRingCenter, radius, stroke, new Color(234, 54, 82));
-		Circle greenRing = new Circle(greenRingCenter, radius, stroke, new Color(36, 138, 64));
+		Circle blueRing = new Circle(blueRingCenter, radius, stroke, new Color(24, 134, 192), null);
+		Circle yellowRing = new Circle(yellowRingCenter, radius, stroke, new Color(249, 176, 65), null);
+		Circle blackRing = new Circle(blackRingCenter, radius, stroke, Color.BLACK, null);
+		Circle redRing = new Circle(redRingCenter, radius, stroke, new Color(234, 54, 82), null);
+		Circle greenRing = new Circle(greenRingCenter, radius, stroke, new Color(36, 138, 64), null);
 
 		// Set Cut-out position
 		if (Trigonometry.getDistanceBetweenTheCentersOfTwoCircles(yellowRing, blueRing) <= radius * 2) {
@@ -229,14 +230,21 @@ public class OlympicRings extends JApplet implements ActionListener {
 		public Point Center;
 		public int Radius;
 		public int Stroke;
-		public Color BorderColor;
-		private int CutOutAngle = -999;
+		private Color BorderColor = null;
+		private Color FillColor = null;
+		public int CutOutPosition = -999;
 
-		// Constructor
-		public Circle(Point centerPoint, int radius, int stroke, Color color) {
+		// Constructors
+		public Circle(Point centerPoint, int radius, int stroke, Color borderColor, Color fillColor) {
 			Center = centerPoint;
 			Radius = radius;
-			BorderColor = color;
+			if (borderColor != null) {
+				BorderColor = borderColor;
+			}
+
+			if (fillColor != null) {
+				FillColor = fillColor;
+			}
 			Stroke = stroke;
 		}
 
@@ -244,7 +252,35 @@ public class OlympicRings extends JApplet implements ActionListener {
 		 * Set the angle at which the circle will be cut out.
 		 */
 		public void setCutOutPosition(int angle) {
-			CutOutAngle = angle;
+			CutOutPosition = angle;
+		}
+
+		/**
+		 * Set border color
+		 */
+		public void setBorderColor(Color color) {
+			BorderColor = color;
+		}
+
+		/**
+		 * Get border color
+		 */
+		public Color getBorderColor() {
+			return BorderColor;
+		}
+
+		/**
+		 * Set fill color
+		 */
+		public void setFillColor(Color color) {
+			FillColor = color;
+		}
+
+		/**
+		 * Get fill color
+		 */
+		public Color getFillColor() {
+			return FillColor;
 		}
 
 		/**
@@ -259,11 +295,31 @@ public class OlympicRings extends JApplet implements ActionListener {
 			canvas.setColor(BorderColor);
 
 			// Draw
-			if (CutOutAngle != -999) {
-				canvas.drawArc(Center.x - Radius, Center.y - Radius, (Radius * 2), (Radius * 2), (CutOutAngle + Stroke),
-						360 - Stroke * 2);
+			if (CutOutPosition != -999) {
+				// Draw Border
+				if (BorderColor != null) {
+					canvas.drawArc(Center.x - Radius, Center.y - Radius, (Radius * 2), (Radius * 2),
+							(CutOutPosition + Stroke), 360 - Stroke * 2);
+				}
+
+				// Fill color
+				if (FillColor != null) {
+					canvas.setColor(FillColor);
+					canvas.fillArc(Center.x - Radius, Center.y - Radius, (Radius * 2), (Radius * 2),
+							(CutOutPosition + Stroke), 360 - Stroke * 2);
+				}
+
 			} else {
-				canvas.drawOval(Center.x - Radius, Center.y - Radius, Radius * 2, Radius * 2);
+				// Draw Border
+				if (BorderColor != null) {
+					canvas.drawOval(Center.x - Radius, Center.y - Radius, Radius * 2, Radius * 2);
+				}
+
+				// Fill color
+				if (FillColor != null) {
+					canvas.setColor(FillColor);
+					canvas.fillArc(Center.x - Radius, Center.y - Radius, Radius * 2, Radius * 2, 0, 360);
+				}
 			}
 		}
 	}
