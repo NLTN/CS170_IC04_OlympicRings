@@ -1,4 +1,4 @@
-# CS170_IC04_OlympicRings
+# CS170 IC04 Olympic Rings
 Chapter 1, PP 5
 Java Project Name:  IC04_OlympicRings
 
